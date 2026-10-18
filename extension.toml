@@ -1,0 +1,16 @@
+id = "claude-status"
+name = "Claude Status"
+version = "0.1.0"
+schema_version = 1
+authors = ["Jeerasak"]
+description = "Slash command that shows Claude Code session status"
+repository = "https://example.com/local/claude-status"
+
+[slash_commands.claude-status]
+description = "Show latest Claude Code session status (model, context, tokens)"
+requires_argument = false
+
+[[capabilities]]
+kind = "process:exec"
+command = "bash"
+args = ["**"]
