@@ -37,6 +37,27 @@ Then, in Zed:
 2. Select the cloned `zed-claude-status` folder.
 3. In the Assistant panel, type `/claude-status`.
 
+## Always-visible status line (Claude Code in Zed's terminal)
+
+Zed's extension API has no status bar API, so the extension can't add one. If you run `claude` in Zed's terminal, you can use Claude Code's own status line instead. `statusline.sh` prints something like:
+
+```
+Sonnet 5.5 | ctx 48.2k | $0.12 | main
+```
+
+Add this to `~/.claude/settings.json`, using the real path to your checkout:
+
+```json
+{
+  "statusLine": {
+    "type": "command",
+    "command": "bash /path/to/zed-claude-status/statusline.sh"
+  }
+}
+```
+
+It needs `bash` and `jq`. Restart `claude` after changing the settings.
+
 ## Project structure
 
 | Path             | Purpose                                                        |
@@ -44,6 +65,7 @@ Then, in Zed:
 | `extension.toml` | Extension manifest: id, slash command, and `process:exec` capability |
 | `src/lib.rs`     | Extension code: registers the command and runs the script      |
 | `status.sh`      | Reads the Claude Code session log and prints the summary       |
+| `statusline.sh`  | One-line status for Claude Code's `statusLine` setting         |
 | `Cargo.toml`     | Rust crate config (`cdylib`, uses `zed_extension_api`)         |
 
 ## Known issues
